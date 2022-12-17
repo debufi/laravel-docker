@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: la-nginx
+    build: ./docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./src/helloworld:/var/www/html/helloworld
+  php:
+    container_name: la-php
+    build: ./docker/php
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src/helloworld:/var/www/html/helloworld
+    working_dir: /var/www/html/helloworld
+  composer:
+    container_name: la-composer
+    image: composer/composer
+    volumes:
+      - ./src/helloworld:/var/www/html/helloworld
+    working_dir: /var/www/html/helloworld
+    command: install
+  mysql:
+    image: mysql:8.0.27
+    container_name: la-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '<root-password>'
+      MYSQL_DATABASE: helloworld
+      MYSQL_USER: helloworld
+      MYSQL_PASSWORD: '<db-password>'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/mysql:/var/lib/mysql
