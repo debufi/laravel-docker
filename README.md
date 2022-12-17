@@ -1,5 +1,5 @@
 # laravel-docker
-Docker compose to setup nginx, php and mysql for laravel 8
+Docker compose to setup nginx, php8 and mysql for laravel 8
 
 ## Images
 1. nginx → nginx:1.20
