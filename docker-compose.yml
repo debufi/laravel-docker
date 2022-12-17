@@ -30,10 +30,10 @@ services:
     image: mysql:8.0.27
     container_name: la-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '<root-password>'
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: helloworld
-      MYSQL_USER: helloworld
-      MYSQL_PASSWORD: '<db-password>'
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
     ports:
       - "3306:3306"
     volumes:
